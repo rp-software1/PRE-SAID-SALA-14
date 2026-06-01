@@ -3,15 +3,15 @@ sala: I-SALA14
 alumno: Nick Camana 5 FN
 curso: PRE-SAID — Desarrollo Moderno con IA y CLI
 dia: 1
-estado: en_progreso
+estado: completado
 loom: omitido
 ---
 ## Bloques
-- [ ] A — Setup Gemini CLI + primera construcción desde terminal
-- [ ] B — Setup Cursor + módulo Platos CRUD completo
-- [ ] C — Comparación CLI vs IDE + PR
+- [x] A — Setup Gemini CLI + primera construcción desde terminal
+- [x] B — Setup Cursor + módulo Platos CRUD completo
+- [x] C — Comparación CLI vs IDE + PR
 ## Verificación final
-- [ ] Gemini CLI funciona y crea archivos en el proyecto
-- [ ] Módulo Platos levanta sin errores en localhost
-- [ ] GET /platos responde en Postman o navegador
-- [ ] PR creado y enviado
+- [x] Gemini CLI funciona y crea archivos en el proyecto
+- [x] Módulo Platos levanta sin errores en localhost
+- [x] GET /platos responde en Postman o navegador
+- [x] PR creado y enviado
