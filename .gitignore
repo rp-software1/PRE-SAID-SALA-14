@@ -1,5 +1,9 @@
+node_modules/
 restaurante-backend/node_modules/
+dist/
 restaurante-backend/dist/
+db.sqlite
 *.db
 *.sqlite
+*.log
 .env
