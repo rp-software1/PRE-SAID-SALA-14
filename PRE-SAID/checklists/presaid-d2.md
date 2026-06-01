@@ -14,4 +14,4 @@ loom: (pendiente de grabar)
 - [x] GET /mesas responde en Postman o navegador
 - [x] Rama feature/mesas mergeada a main
 - [x] Documento de hallazgos del code review completado
-- [ ] PR creado y enviado a sala par
+- [x] PR creado y enviado a sala par
