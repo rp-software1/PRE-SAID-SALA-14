@@ -12,25 +12,27 @@ Backend de gestión de platos para un restaurante, construido con **NestJS**, **
 
 ```
 PRE-SAID-SALA-14/
-├── .gitignore                  # Archivos ignorados: node_modules/, dist/, db.sqlite, *.log
-├── db.sqlite                   # Base de datos SQLite (ignorada por git)
-├── PRE-SAID/                   # Proyecto NestJS
+├── .gitignore                     # Archivos ignorados: node_modules/, dist/, db.sqlite, *.log
+├── db.sqlite                      # Base de datos SQLite (ignorada por git)
+├── PRE-SAID/                      # Proyecto NestJS
 │   ├── src/
-│   │   ├── main.ts             # Entry point con ValidationPipe global
-│   │   ├── app.module.ts       # Módulo raíz (TypeORM + PlatosModule)
-│   │   ├── app.controller.ts   # Controlador raíz (GET /)
-│   │   ├── app.service.ts      # Servicio raíz
-│   │   └── platos/             # Módulo Platos (CRUD completo)
-│   │       ├── entities/plato.entity.ts
-│   │       ├── dto/crear-plato.dto.ts
-│   │       ├── dto/actualizar-plato.dto.ts
-│   │       ├── platos.service.ts
-│   │       ├── platos.controller.ts
-│   │       └── platos.module.ts
-│   ├── test/                   # Tests e2e
-│   ├── checklists/             # Checklists de cada día
-│   ├── entregables/            # Entregables de cada día
-│   ├── dist/                   # Build (ignorado por git)
+│   │   ├── main.ts                # Entry point con ValidationPipe global
+│   │   ├── app.module.ts          # Módulo raíz (TypeORM + PlatosModule + MesasModule)
+│   │   ├── app.controller.ts      # Controlador raíz (GET /)
+│   │   ├── app.service.ts         # Servicio raíz
+│   │   ├── platos/                # Módulo Platos (Día 1)
+│   │   └── mesas/                 # Módulo Mesas (Día 2)
+│   ├── dia1/                      # Documentación del Día 1
+│   │   ├── checklist.md
+│   │   ├── entregable.md
+│   │   ├── feedback.md
+│   │   └── README.old.md
+│   ├── dia2/                      # Documentación del Día 2
+│   │   ├── checklist.md
+│   │   ├── hallazgos-code-review.md
+│   │   └── feedback.md
+│   ├── test/                      # Tests e2e
+│   ├── dist/                      # Build (ignorado por git)
 │   ├── package.json
 │   ├── tsconfig.json
 │   ├── nest-cli.json
@@ -180,13 +182,15 @@ npm run format
 ### Commits del proyecto
 
 ```
+3f94cb89 chore: marcar PR como completado en checklist D2
+c00a9e48 PRESAID-D2-FINAL: Mesas CRUD + cambiarEstado + code review + hallazgos
+b04050d1 PRESAID-D2-START: [ayer: Setup CLI+Cursor, Platos CRUD] [hoy: Code review + Mesas]
+8f0aaae6 docs: mejorar README con procesos del dia 1, estructura, troubleshooting
 cc41c451 chore: agregar .gitignore, remover node_modules/dist/db.sqlite del tracking
 aa64e278 PRESAID-D1-B: módulo Platos CRUD completo
 c895ab80 PRESAID-D1-FINAL: Platos CRUD + CLI setup + comparación
 347e1d0b PRESAID-D1-A: setup CLI + proyecto NestJS
 5cb110bc PRESAID-D1-START: setup inicial
-959c1132 Update README.md
-74a2edac Initial commit
 ```
 
 ### Reglas del repo
@@ -208,10 +212,17 @@ c895ab80 PRESAID-D1-FINAL: Platos CRUD + CLI setup + comparación
 
 ---
 
+## Historial de días
+
+| Día | Descripción | Carpeta |
+|-----|-------------|---------|
+| 1 | Setup CLI + Módulo Platos CRUD | [`dia1/`](dia1/) |
+| 2 | Code review + Módulo Mesas CRUD | [`dia2/`](dia2/) |
+
 ## Notas para próximos días
 
+- [ ] Día 3 — Módulo Pedidos (depende de Platos + Mesas)
 - [ ] Agregar autenticación / login
-- [ ] Agregar relaciones entre entidades
 - [ ] Migrar a PostgreSQL
-- [ ] Agregar tests unitarios del servicio Platos
+- [ ] Agregar tests unitarios del servicio Platos y Mesas
 - [ ] Documentar con Swagger
