@@ -1,0 +1,5 @@
+restaurante-backend/node_modules/
+restaurante-backend/dist/
+*.db
+*.sqlite
+.env
