@@ -1,6 +1,0 @@
-PRE-SAID-NICKCA/restaurante-backend/node_modules/
-PRE-SAID-NICKCA/restaurante-backend/dist/
-*.db
-*.sqlite
-*.log
-.env
