@@ -1,10 +1,20 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PlatosModule } from './platos/platos.module';
+import { Plato } from './platos/entities/plato.entity';
 
 @Module({
-  imports: [PlatosModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'better-sqlite3',
+      database: 'db.sqlite',
+      entities: [Plato],
+      synchronize: true,
+    }),
+    PlatosModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
