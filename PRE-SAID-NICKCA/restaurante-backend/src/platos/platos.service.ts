@@ -1,44 +1,42 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Plato } from './entities/plato.entity';
 import { CreatePlatoDto } from './dto/create-plato.dto';
 import { UpdatePlatoDto } from './dto/update-plato.dto';
-import { Plato } from './entities/plato.entity';
 
 @Injectable()
 export class PlatosService {
-  private platos: Plato[] = [];
-  private idCounter = 1;
+  constructor(
+    @InjectRepository(Plato)
+    private readonly platoRepository: Repository<Plato>,
+  ) {}
 
-  create(createPlatoDto: CreatePlatoDto) {
-    const newPlato: Plato = {
-      id: this.idCounter++,
-      ...createPlatoDto,
-    };
-    this.platos.push(newPlato);
-    return newPlato;
+  async create(createPlatoDto: CreatePlatoDto): Promise<Plato> {
+    const plato = this.platoRepository.create(createPlatoDto);
+    return this.platoRepository.save(plato);
   }
 
-  findAll() {
-    return this.platos;
+  async findAll(): Promise<Plato[]> {
+    return this.platoRepository.find({ order: { nombre: 'ASC' } });
   }
 
-  findOne(id: number) {
-    const plato = this.platos.find((p) => p.id === id);
+  async findOne(id: number): Promise<Plato> {
+    const plato = await this.platoRepository.findOne({ where: { id } });
     if (!plato) {
       throw new NotFoundException(`Plato con ID ${id} no encontrado`);
     }
     return plato;
   }
 
-  update(id: number, updatePlatoDto: UpdatePlatoDto) {
-    const plato = this.findOne(id);
-    const index = this.platos.findIndex((p) => p.id === id);
-    this.platos[index] = { ...plato, ...updatePlatoDto };
-    return this.platos[index];
+  async update(id: number, updatePlatoDto: UpdatePlatoDto): Promise<Plato> {
+    const plato = await this.findOne(id);
+    Object.assign(plato, updatePlatoDto);
+    return this.platoRepository.save(plato);
   }
 
-  remove(id: number) {
-    this.findOne(id);
-    this.platos = this.platos.filter((p) => p.id !== id);
-    return { deleted: true };
+  async remove(id: number): Promise<void> {
+    const plato = await this.findOne(id);
+    await this.platoRepository.remove(plato);
   }
 }

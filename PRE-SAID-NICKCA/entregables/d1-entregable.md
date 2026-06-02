@@ -13,9 +13,9 @@ Gemini CLI v0.44.1 instalado y autenticado con cuenta @gmail. Se creó y borró 
 ## 3. Checklist V1-V7
 | Criterio | Resultado |
 |---|---|
-| V1: Entidad con id, nombre, precio, disponible, createdAt, updatedAt | Pendiente de verificar |
-| V2: Sin campos inventados | Pendiente de verificar |
-| V3: DTOs con validaciones reales | Pendiente de verificar |
+| V1: Entidad con id, nombre, precio, disponible, createdAt, updatedAt | ❌ Falta `disponible`, `createdAt`, `updatedAt`; sobra `descripcion` |
+| V2: Sin campos inventados | ❌ La IA inventó el campo `descripcion` |
+| V3: DTOs con validaciones reales | ❌ Sin decoradores `@IsString`, `@IsNumber`, etc. |
 | V4: 5 endpoints REST | ✅ |
 | V5: Módulo registrado en AppModule | ✅ |
 | V6: No se modificaron archivos extra | ✅ |
@@ -30,4 +30,22 @@ Gemini CLI v0.44.1 instalado y autenticado con cuenta @gmail. Se creó y borró 
 | Automatización | Ideal para tareas repetitivas | Ideal para exploración |
 
 ## 5. GET /platos responde
-El servidor NestJS corre en `http://localhost:3001`. Endpoint `GET /platos` responde correctamente.
+El servidor NestJS corre en `http://localhost:3000`. Endpoint `GET /platos` responde correctamente.
+
+---
+
+## 6. Correcciones aplicadas (rama `presaid-d1-fixes-nick`)
+
+La IA generó el módulo incompleto respecto a lo especificado en el documento. Se corrigió:
+
+| Archivo | Problema | Solución |
+|---|---|---|
+| `plato.entity.ts` | Faltaban `disponible`, `createdAt`, `updatedAt`; sobraba `descripcion`; sin decoradores TypeORM | Entity con TypeORM decorators y campos exactos |
+| `create-plato.dto.ts` | Sin validaciones `class-validator`; campo `descripcion` extra | Decoradores `@IsString`, `@IsNumber`, `@IsBoolean`, etc. |
+| `platos.service.ts` | Usaba arreglo en memoria | Cambiado a `Repository<Plato>` con TypeORM |
+| `platos.module.ts` | Sin `TypeOrmModule.forFeature([Plato])` | Agregado |
+| `app.module.ts` | Sin configuración TypeORM | Agregado `TypeOrmModule.forRoot` con SQLite |
+| `main.ts` | Sin `ValidationPipe` global | Agregado con `whitelist`, `forbidNonWhitelisted`, `transform` |
+| `package.json` | Faltaban dependencias | Agregadas `class-validator`, `typeorm`, etc. |
+
+**Lección:** El prompt fue correcto, pero la IA omitió partes clave. El Navigator debe revisar contra la spec línea por línea. No aceptar solo porque "funciona".
