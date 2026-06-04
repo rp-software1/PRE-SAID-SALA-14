@@ -13,7 +13,7 @@
    3 hallazgos menores (redundancia en validaciones, falta de tipo explícito, sin validación de transición). Ninguno grave, la IA hizo un buen trabajo.
 
 5. **¿Tiempo total del día?**  
-   ~2 horas incluyendo documentación y verificación.
+   ~6 horas incluyendo documentación y verificación.
 
 6. **¿Qué debería mejorar este documento?**  
    Agregar ejemplos de respuestas HTTP esperadas para cada endpoint.
