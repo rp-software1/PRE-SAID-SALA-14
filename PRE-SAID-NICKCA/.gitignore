@@ -1,5 +1,9 @@
 restaurante-backend/node_modules/
 restaurante-backend/dist/
+restaurante-backend/db.sqlite
 *.db
 *.sqlite
 .env
+.DS_Store
+Thumbs.db
+*.log
