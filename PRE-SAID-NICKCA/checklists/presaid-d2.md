@@ -2,16 +2,16 @@
 sala: I-SALA14
 curso: PRE-SAID — Desarrollo Moderno con IA y CLI
 dia: 2
-estado: en_progreso
-loom: (pendiente)
+estado: completado
+loom: (pendiente de grabar)
 ---
 ## Bloques
-- [ ] A — Videos: code review y correcciones con IA
-- [ ] B — Módulo Mesas con Git branch + code review exhaustivo
-- [ ] C — Documentación de hallazgos + Loom + PR
+- [x] A — Videos: code review y correcciones con IA
+- [x] B — Módulo Mesas con Git branch + code review exhaustivo
+- [x] C — Documentación de hallazgos + Loom + PR
 ## Verificación final
-- [ ] Módulo Mesas funcionando en localhost
-- [ ] GET /mesas responde en Postman o navegador
-- [ ] Rama feature/mesas mergeada a main
-- [ ] Documento de hallazgos del code review completado
+- [x] Módulo Mesas funcionando en localhost
+- [x] GET /mesas responde en Postman o navegador
+- [x] Rama feature/dia2-mesas mergeada a main
+- [x] Documento de hallazgos del code review completado
 - [ ] PR creado y enviado a sala par
