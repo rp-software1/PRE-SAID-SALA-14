@@ -79,7 +79,7 @@ export default function Dashboard() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem" }}>
           <div>
             <p style={{ margin: "0 0 6px", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--gold)" }}>
-              Sistema de Gestión
+              El Sabrocito
             </p>
             <h1 style={{
               margin: 0, fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em",

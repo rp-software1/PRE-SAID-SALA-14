@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "RestaurantePRO — Sistema de Gestión",
-  description: "Sistema profesional de gestión para restaurantes: platos, mesas y pedidos.",
+  title: "El Sabrocito — Sistema de Gestión",
+  description: "Sistema de gestión de El Sabrocito: platos, mesas, pedidos, comandas y tickets.",
 };
 
 export default function RootLayout({

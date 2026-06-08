@@ -43,7 +43,7 @@ export function NavBar() {
                 background: "linear-gradient(135deg, #fbbf24, #f59e0b)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
                 letterSpacing: "-0.01em",
-              }}>RestaurantePRO</span>
+              }}>El Sabrocito</span>
             </div>
           </Link>
 
