@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Pedido } from '../../pedidos/entities/pedido.entity';
 
 @Entity('platos')
 export class Plato {
@@ -25,4 +27,7 @@ export class Plato {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @ManyToMany(() => Pedido, (pedido) => pedido.platos)
+  pedidos: Pedido[];
 }

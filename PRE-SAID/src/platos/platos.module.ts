@@ -8,6 +8,6 @@ import { PlatosService } from './platos.service';
   imports: [TypeOrmModule.forFeature([Plato])],
   controllers: [PlatosController],
   providers: [PlatosService],
-  exports: [PlatosService],
+  exports: [PlatosService, TypeOrmModule],
 })
 export class PlatosModule {}

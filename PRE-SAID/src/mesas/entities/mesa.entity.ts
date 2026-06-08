@@ -1,7 +1,9 @@
+import { Pedido } from '../../pedidos/entities/pedido.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -34,4 +36,7 @@ export class Mesa {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToMany(() => Pedido, (pedido) => pedido.mesa)
+  pedidos: Pedido[];
 }
