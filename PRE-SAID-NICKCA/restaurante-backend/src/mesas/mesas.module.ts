@@ -6,8 +6,8 @@ import { MesasService } from './mesas.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Mesa])],
+  exports: [MesasService, TypeOrmModule],
   controllers: [MesasController],
   providers: [MesasService],
-  exports: [MesasService],
 })
 export class MesasModule {}

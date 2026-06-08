@@ -6,6 +6,7 @@ import { Plato } from './entities/plato.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Plato])],
+  exports: [TypeOrmModule],
   controllers: [PlatosController],
   providers: [PlatosService],
 })

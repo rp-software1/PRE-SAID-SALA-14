@@ -6,17 +6,20 @@ import { PlatosModule } from './platos/platos.module';
 import { Plato } from './platos/entities/plato.entity';
 import { MesasModule } from './mesas/mesas.module';
 import { Mesa } from './mesas/entities/mesa.entity';
+import { PedidosModule } from './pedidos/pedidos.module';
+import { Pedido } from './pedidos/entities/pedido.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: 'db.sqlite',
-      entities: [Plato, Mesa],
+      entities: [Plato, Mesa, Pedido],
       synchronize: true,
     }),
     PlatosModule,
     MesasModule,
+    PedidosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
