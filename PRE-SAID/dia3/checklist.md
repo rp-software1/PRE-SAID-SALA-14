@@ -15,5 +15,5 @@ loom: (agregar link al terminar)
 - [x] Errores 400 en vez de 500 cuando faltan datos o IDs no existen
 - [x] GET /platos y GET /mesas siguen funcionando
 - [x] CHANGES.md actualizado
-- [x] feedback_dia3_[tunombre].md completado y commiteado
-- [x] PR creado y enviado a sala par
+- [x] feedback_dia3_valentino.md completado y commiteado
+- [ ] PR creado y enviado a sala par
