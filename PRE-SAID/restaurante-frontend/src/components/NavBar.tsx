@@ -4,10 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { href: "/",        label: "Dashboard",  icon: "⊞" },
-  { href: "/platos",  label: "Platos",     icon: "🍲" },
-  { href: "/mesas",   label: "Mesas",      icon: "🪑" },
-  { href: "/pedidos", label: "Pedidos",    icon: "📋" },
+  { href: "/",          label: "Dashboard", icon: "⊞" },
+  { href: "/platos",    label: "Platos",    icon: "🍲" },
+  { href: "/mesas",     label: "Mesas",     icon: "🪑" },
+  { href: "/pedidos",   label: "Pedidos",   icon: "📋" },
+  { href: "/comandas",  label: "Comandas",  icon: "🔥" },
+  { href: "/tickets",   label: "Tickets",   icon: "🧾" },
 ];
 
 export function NavBar() {
@@ -15,10 +17,8 @@ export function NavBar() {
 
   return (
     <nav style={{
-      position: "sticky",
-      top: 0,
-      zIndex: 50,
-      background: "rgba(13,13,13,0.8)",
+      position: "sticky", top: 0, zIndex: 50,
+      background: "rgba(13,13,13,0.85)",
       backdropFilter: "blur(20px)",
       WebkitBackdropFilter: "blur(20px)",
       borderBottom: "1px solid rgba(255,255,255,0.07)",
@@ -30,40 +30,36 @@ export function NavBar() {
           <Link href="/" style={{ textDecoration: "none" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <div style={{
-                width: "36px", height: "36px", borderRadius: "10px",
+                width: "34px", height: "34px", borderRadius: "9px",
                 background: "linear-gradient(135deg, #f59e0b, #d97706)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "18px", boxShadow: "0 0 16px rgba(245,158,11,0.35)",
-              }}>
-                🍽️
-              </div>
+                fontSize: "17px", boxShadow: "0 0 14px rgba(245,158,11,0.35)",
+              }}>🍽️</div>
               <span style={{
-                fontWeight: 700, fontSize: "1.1rem",
+                fontWeight: 700, fontSize: "1rem",
                 background: "linear-gradient(135deg, #fbbf24, #f59e0b)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
                 letterSpacing: "-0.01em",
-              }}>
-                RestaurantePRO
-              </span>
+              }}>RestaurantePRO</span>
             </div>
           </Link>
 
           {/* Links */}
-          <div style={{ display: "flex", gap: "4px" }}>
+          <div style={{ display: "flex", gap: "2px", flexWrap: "wrap" }}>
             {navLinks.map(({ href, label, icon }) => {
               const active = pathname === href;
               return (
                 <Link key={href} href={href} style={{ textDecoration: "none" }}>
                   <div style={{
-                    display: "flex", alignItems: "center", gap: "6px",
-                    padding: "8px 16px", borderRadius: "8px",
-                    fontSize: "0.875rem", fontWeight: 500,
+                    display: "flex", alignItems: "center", gap: "5px",
+                    padding: "7px 13px", borderRadius: "8px",
+                    fontSize: "0.82rem", fontWeight: 500,
                     transition: "all 0.2s",
                     background: active ? "rgba(245,158,11,0.15)" : "transparent",
-                    color: active ? "#fbbf24" : "rgba(255,255,255,0.6)",
+                    color: active ? "#fbbf24" : "rgba(255,255,255,0.55)",
                     border: active ? "1px solid rgba(245,158,11,0.3)" : "1px solid transparent",
                   }}>
-                    <span style={{ fontSize: "15px" }}>{icon}</span>
+                    <span style={{ fontSize: "13px" }}>{icon}</span>
                     {label}
                   </div>
                 </Link>

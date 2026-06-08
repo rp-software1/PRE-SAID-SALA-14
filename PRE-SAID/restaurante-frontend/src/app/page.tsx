@@ -10,63 +10,38 @@ interface DashboardData {
   platos: number;
   mesas: number;
   pedidos: number;
+  comandas: number;
+  tickets: number;
 }
 
+
 const statCards = [
-  {
-    key: "platos" as const,
-    label: "Platos",
-    sub: "en el menú",
-    href: "/platos",
-    icon: "🍲",
-    accent: "#f59e0b",
-    glow: "rgba(245,158,11,0.18)",
-    border: "rgba(245,158,11,0.25)",
-    bg: "rgba(245,158,11,0.06)",
-  },
-  {
-    key: "mesas" as const,
-    label: "Mesas",
-    sub: "registradas",
-    href: "/mesas",
-    icon: "🪑",
-    accent: "#10b981",
-    glow: "rgba(16,185,129,0.18)",
-    border: "rgba(16,185,129,0.25)",
-    bg: "rgba(16,185,129,0.06)",
-  },
-  {
-    key: "pedidos" as const,
-    label: "Pedidos",
-    sub: "en total",
-    href: "/pedidos",
-    icon: "📋",
-    accent: "#3b82f6",
-    glow: "rgba(59,130,246,0.18)",
-    border: "rgba(59,130,246,0.25)",
-    bg: "rgba(59,130,246,0.06)",
-  },
+  { key: "platos"   as const, label: "Platos",   sub: "en el menú",   href: "/platos",   icon: "🍲", accent: "#f59e0b", glow: "rgba(245,158,11,0.18)", border: "rgba(245,158,11,0.25)", bg: "rgba(245,158,11,0.06)" },
+  { key: "mesas"    as const, label: "Mesas",    sub: "registradas",  href: "/mesas",    icon: "🪑", accent: "#10b981", glow: "rgba(16,185,129,0.18)", border: "rgba(16,185,129,0.25)", bg: "rgba(16,185,129,0.06)" },
+  { key: "pedidos"  as const, label: "Pedidos",  sub: "en total",     href: "/pedidos",  icon: "📋", accent: "#3b82f6", glow: "rgba(59,130,246,0.18)", border: "rgba(59,130,246,0.25)", bg: "rgba(59,130,246,0.06)" },
+  { key: "comandas" as const, label: "Comandas", sub: "de cocina",    href: "/comandas", icon: "🔥", accent: "#f97316", glow: "rgba(249,115,22,0.18)", border: "rgba(249,115,22,0.25)", bg: "rgba(249,115,22,0.06)" },
+  { key: "tickets"  as const, label: "Tickets",  sub: "generados",    href: "/tickets",  icon: "🧾", accent: "#8b5cf6", glow: "rgba(139,92,246,0.18)", border: "rgba(139,92,246,0.25)", bg: "rgba(139,92,246,0.06)" },
 ];
 
 export default function Dashboard() {
-  const [data, setData] = useState<DashboardData>({ platos: 0, mesas: 0, pedidos: 0 });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [data, setData] = useState<DashboardData>({ platos: 0, mesas: 0, pedidos: 0, comandas: 0, tickets: 0 });
+  const [loading, setLoading]     = useState(true);
+  const [error, setError]         = useState(false);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const { notify } = useNotification();
 
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
-      const [platos, mesas, pedidos] = await Promise.all([
-        api("/platos"),
-        api("/mesas"),
-        api("/pedidos"),
+      const [platos, mesas, pedidos, comandas, tickets] = await Promise.all([
+        api("/platos"), api("/mesas"), api("/pedidos"), api("/comandas"), api("/tickets"),
       ]);
       setData({
-        platos:  Array.isArray(platos)  ? platos.length  : 0,
-        mesas:   Array.isArray(mesas)   ? mesas.length   : 0,
-        pedidos: Array.isArray(pedidos) ? pedidos.length : 0,
+        platos:   Array.isArray(platos)   ? platos.length   : 0,
+        mesas:    Array.isArray(mesas)    ? mesas.length    : 0,
+        pedidos:  Array.isArray(pedidos)  ? pedidos.length  : 0,
+        comandas: Array.isArray(comandas) ? comandas.length : 0,
+        tickets:  Array.isArray(tickets)  ? tickets.length  : 0,
       });
       setLastUpdate(new Date());
       setError(false);

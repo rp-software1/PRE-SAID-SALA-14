@@ -1,3 +1,0 @@
-# PRE-SAID-SALA-14
-
-# SALA 14
