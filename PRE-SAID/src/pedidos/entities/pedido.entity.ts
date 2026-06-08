@@ -5,11 +5,13 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Mesa } from '../../mesas/entities/mesa.entity';
 import { Plato } from '../../platos/entities/plato.entity';
+import { Comanda } from '../../comandas/entities/comanda.entity';
 
 export enum EstadoPedido {
   PENDIENTE = 'pendiente',
@@ -48,4 +50,7 @@ export class Pedido {
     inverseJoinColumn: { name: 'plato_id', referencedColumnName: 'id' },
   })
   platos: Plato[];
+
+  @OneToMany(() => Comanda, (comanda) => comanda.pedido)
+  comandas: Comanda[];
 }

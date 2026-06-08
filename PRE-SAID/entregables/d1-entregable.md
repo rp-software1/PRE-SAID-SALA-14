@@ -1,5 +1,5 @@
 # Entregable Día 1 — PRE-SAID
-**Alumno:** Nick Camana 5 FN  
+**Alumno:** Valentino Cuenca 5 FN  
 **Sala:** I-SALA14  
 **Estado:** Completado
 

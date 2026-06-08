@@ -1,69 +1,223 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import { api } from "@/lib/api";
+import { useNotification } from "@/components/Notification";
+import { SkeletonCard } from "@/components/LoadingSpinner";
 
-const API = "http://localhost:3000";
+interface DashboardData {
+  platos: number;
+  mesas: number;
+  pedidos: number;
+}
+
+const statCards = [
+  {
+    key: "platos" as const,
+    label: "Platos",
+    sub: "en el menú",
+    href: "/platos",
+    icon: "🍲",
+    accent: "#f59e0b",
+    glow: "rgba(245,158,11,0.18)",
+    border: "rgba(245,158,11,0.25)",
+    bg: "rgba(245,158,11,0.06)",
+  },
+  {
+    key: "mesas" as const,
+    label: "Mesas",
+    sub: "registradas",
+    href: "/mesas",
+    icon: "🪑",
+    accent: "#10b981",
+    glow: "rgba(16,185,129,0.18)",
+    border: "rgba(16,185,129,0.25)",
+    bg: "rgba(16,185,129,0.06)",
+  },
+  {
+    key: "pedidos" as const,
+    label: "Pedidos",
+    sub: "en total",
+    href: "/pedidos",
+    icon: "📋",
+    accent: "#3b82f6",
+    glow: "rgba(59,130,246,0.18)",
+    border: "rgba(59,130,246,0.25)",
+    bg: "rgba(59,130,246,0.06)",
+  },
+];
 
 export default function Dashboard() {
-  const [data, setData] = useState({ platos: 0, mesas: 0, pedidos: 0 });
+  const [data, setData] = useState<DashboardData>({ platos: 0, mesas: 0, pedidos: 0 });
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const { notify } = useNotification();
 
-  useEffect(() => {
-    Promise.all([
-      fetch(`${API}/platos`).then((r) => r.json()),
-      fetch(`${API}/mesas`).then((r) => r.json()),
-      fetch(`${API}/pedidos`).then((r) => r.json()),
-    ])
-      .then(([platos, mesas, pedidos]) => {
-        setData({
-          platos: Array.isArray(platos) ? platos.length : 0,
-          mesas: Array.isArray(mesas) ? mesas.length : 0,
-          pedidos: Array.isArray(pedidos) ? pedidos.length : 0,
-        });
-      })
-      .catch(() => setError(true));
-  }, []);
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      const [platos, mesas, pedidos] = await Promise.all([
+        api("/platos"),
+        api("/mesas"),
+        api("/pedidos"),
+      ]);
+      setData({
+        platos:  Array.isArray(platos)  ? platos.length  : 0,
+        mesas:   Array.isArray(mesas)   ? mesas.length   : 0,
+        pedidos: Array.isArray(pedidos) ? pedidos.length : 0,
+      });
+      setLastUpdate(new Date());
+      setError(false);
+    } catch {
+      setError(true);
+      notify("Error al cargar el dashboard", "error");
+    } finally {
+      setLoading(false);
+    }
+  }, [notify]);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   if (error) {
     return (
-      <div className="text-center py-20">
-        <h1 className="text-2xl font-bold text-red-600">Error de conexión</h1>
-        <p className="text-gray-600 mt-2">
-          No se pudo conectar con el backend en {API}
+      <div style={{ textAlign: "center", padding: "5rem 0" }}>
+        <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚡</div>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#ef4444", margin: "0 0 0.5rem" }}>
+          Error de conexión
+        </h1>
+        <p style={{ color: "var(--text-secondary)", margin: 0 }}>
+          No se pudo conectar con el backend en{" "}
+          <code style={{ color: "var(--gold)", background: "rgba(245,158,11,0.1)", padding: "2px 6px", borderRadius: "4px" }}>
+            http://localhost:3000
+          </code>
         </p>
       </div>
     );
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">
-        Dashboard del Restaurante
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Link href="/platos">
-          <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition cursor-pointer">
-            <h2 className="text-lg font-semibold text-gray-600">Platos</h2>
-            <p className="text-4xl font-bold text-blue-600 mt-2">{data.platos}</p>
-            <p className="text-gray-500 mt-2">Total de platos registrados</p>
+    <div className="animate-fade-in">
+
+      {/* ── Hero Header ── */}
+      <div style={{ marginBottom: "2.5rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem" }}>
+          <div>
+            <p style={{ margin: "0 0 6px", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--gold)" }}>
+              Sistema de Gestión
+            </p>
+            <h1 style={{
+              margin: 0, fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em",
+              background: "linear-gradient(135deg, #f5f5f5 0%, #a1a1aa 100%)",
+              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+            }}>
+              Dashboard
+            </h1>
+            {lastUpdate && (
+              <p style={{ margin: "6px 0 0", fontSize: "0.78rem", color: "var(--text-muted)" }}>
+                Actualizado: {lastUpdate.toLocaleTimeString("es-PE")}
+              </p>
+            )}
           </div>
-        </Link>
-        <Link href="/mesas">
-          <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition cursor-pointer">
-            <h2 className="text-lg font-semibold text-gray-600">Mesas</h2>
-            <p className="text-4xl font-bold text-green-600 mt-2">{data.mesas}</p>
-            <p className="text-gray-500 mt-2">Total de mesas registradas</p>
-          </div>
-        </Link>
-        <Link href="/pedidos">
-          <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition cursor-pointer">
-            <h2 className="text-lg font-semibold text-gray-600">Pedidos</h2>
-            <p className="text-4xl font-bold text-orange-600 mt-2">{data.pedidos}</p>
-            <p className="text-gray-500 mt-2">Pedidos registrados</p>
-          </div>
-        </Link>
+
+          <button
+            onClick={fetchData}
+            disabled={loading}
+            style={{
+              display: "flex", alignItems: "center", gap: "8px",
+              padding: "9px 18px", borderRadius: "8px",
+              background: "rgba(245,158,11,0.1)",
+              border: "1px solid rgba(245,158,11,0.25)",
+              color: "#f59e0b", fontSize: "0.85rem", fontWeight: 600,
+              opacity: loading ? 0.6 : 1,
+            }}
+          >
+            ↻ Actualizar
+          </button>
+        </div>
       </div>
+
+      {/* ── Stat Cards ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.25rem", marginBottom: "2.5rem" }}>
+        {loading
+          ? [1, 2, 3].map((i) => <SkeletonCard key={i} />)
+          : statCards.map(({ key, label, sub, href, icon, accent, glow, border, bg }) => (
+              <Link key={key} href={href} style={{ textDecoration: "none" }}>
+                <div style={{
+                  background: bg,
+                  border: `1px solid ${border}`,
+                  borderRadius: "var(--radius-lg)",
+                  padding: "1.5rem",
+                  transition: "all 0.25s",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 32px ${glow}`;
+                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
+                    <div>
+                      <p style={{ margin: 0, fontSize: "0.8rem", fontWeight: 600, color: accent, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                        {label}
+                      </p>
+                    </div>
+                    <span style={{ fontSize: "1.8rem" }}>{icon}</span>
+                  </div>
+
+                  <p style={{ margin: "0 0 4px", fontSize: "3rem", fontWeight: 800, color: accent, lineHeight: 1, letterSpacing: "-0.02em" }}>
+                    {data[key]}
+                  </p>
+                  <p style={{ margin: "0 0 1.25rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                    {sub}
+                  </p>
+
+                  <div style={{
+                    display: "flex", alignItems: "center", gap: "6px",
+                    fontSize: "0.8rem", fontWeight: 600, color: accent,
+                  }}>
+                    Ver detalle
+                    <span style={{ fontSize: "12px" }}>→</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+      </div>
+
+      {/* ── Estado del Sistema ── */}
+      {!loading && (
+        <div style={{
+          background: "var(--bg-card)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius-lg)",
+          padding: "1.5rem",
+        }}>
+          <h2 style={{ margin: "0 0 1.25rem", fontSize: "1rem", fontWeight: 700, color: "var(--text-primary)" }}>
+            Estado del Sistema
+          </h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem" }}>
+            {statCards.map(({ key, label, icon, accent }) => (
+              <div key={key} style={{
+                display: "flex", alignItems: "center", gap: "12px",
+                padding: "14px", borderRadius: "10px",
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid var(--border)",
+              }}>
+                <span style={{ fontSize: "1.5rem" }}>{icon}</span>
+                <div>
+                  <p style={{ margin: 0, fontSize: "0.75rem", color: "var(--text-muted)" }}>{label}</p>
+                  <p style={{ margin: 0, fontSize: "1.4rem", fontWeight: 800, color: accent }}>{data[key]}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

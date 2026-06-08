@@ -1,6 +1,6 @@
 # Code Review — Día 2: Módulo Mesas
 
-**Alumno:** Nick Camana 5 FN  
+**Alumno:** Valentino Cuenca 5 FN  
 **Sala:** I-SALA14  
 **Fecha:** 04/06/2026
 

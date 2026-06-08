@@ -1,20 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { api } from "@/lib/api";
+import { useNotification } from "@/components/Notification";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { SkeletonCard } from "@/components/LoadingSpinner";
 
-const API = "http://localhost:3000";
-
-interface Plato {
-  id: number;
-  nombre: string;
-  precio: number;
-}
-
-interface Mesa {
-  id: number;
-  numero: number;
-}
-
+interface Plato { id: number; nombre: string; precio: number; }
+interface Mesa  { id: number; numero: number; }
 interface Pedido {
   id: number;
   mesa: Mesa;
@@ -24,186 +17,367 @@ interface Pedido {
   createdAt: string;
 }
 
+/* Estado → orden visual de progreso */
+const ESTADOS = ["pendiente", "en_preparacion", "listo", "entregado"] as const;
+type EstadoKey = typeof ESTADOS[number];
+
+const estadoConfig: Record<EstadoKey, { label: string; icon: string; color: string; bg: string; border: string }> = {
+  pendiente:      { label: "Pendiente",     icon: "⏳", color: "#eab308", bg: "rgba(234,179,8,0.1)",    border: "rgba(234,179,8,0.25)" },
+  en_preparacion: { label: "Preparando",    icon: "👨‍🍳", color: "#3b82f6", bg: "rgba(59,130,246,0.1)",  border: "rgba(59,130,246,0.25)" },
+  listo:          { label: "Listo",         icon: "✅", color: "#10b981", bg: "rgba(16,185,129,0.1)",   border: "rgba(16,185,129,0.25)" },
+  entregado:      { label: "Entregado",     icon: "📦", color: "#71717a", bg: "rgba(113,113,122,0.08)", border: "rgba(113,113,122,0.2)" },
+};
+
+const inputStyle: React.CSSProperties = {
+  background: "var(--bg-input)", border: "1px solid var(--border)",
+  color: "var(--text-primary)", borderRadius: "var(--radius-md)",
+  padding: "10px 14px", fontSize: "0.9rem", width: "100%",
+  outline: "none", fontFamily: "inherit",
+};
+const btnPrimary: React.CSSProperties = {
+  display: "inline-flex", alignItems: "center", gap: "6px",
+  padding: "10px 20px", borderRadius: "8px",
+  background: "linear-gradient(135deg, #f59e0b, #d97706)",
+  border: "none", color: "#fff", fontWeight: 600, fontSize: "0.875rem",
+  cursor: "pointer", boxShadow: "0 4px 14px rgba(245,158,11,0.3)",
+};
+const btnGhost: React.CSSProperties = {
+  display: "inline-flex", alignItems: "center", gap: "6px",
+  padding: "10px 20px", borderRadius: "8px",
+  background: "transparent", border: "1px solid var(--border)",
+  color: "var(--text-secondary)", fontWeight: 500, fontSize: "0.875rem", cursor: "pointer",
+};
+
+function ProgressBar({ estado }: { estado: string }) {
+  const idx = ESTADOS.indexOf(estado as EstadoKey);
+  return (
+    <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
+      {ESTADOS.map((s, i) => {
+        const cfg = estadoConfig[s];
+        const active = i <= idx;
+        return (
+          <div key={s} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+            <div style={{
+              height: "4px", borderRadius: "99px", width: "100%",
+              background: active ? cfg.color : "rgba(255,255,255,0.08)",
+              transition: "background 0.3s",
+            }} />
+            {i === idx && (
+              <span style={{ fontSize: "0.65rem", color: cfg.color, fontWeight: 700, whiteSpace: "nowrap" }}>
+                {cfg.icon} {cfg.label}
+              </span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function PedidosPage() {
-  const [pedidos, setPedidos] = useState<Pedido[]>([]);
-  const [platos, setPlatos] = useState<Plato[]>([]);
-  const [mesas, setMesas] = useState<Mesa[]>([]);
-  const [error, setError] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [mesaId, setMesaId] = useState("");
-  const [platoIds, setPlatoIds] = useState<number[]>([]);
+  const [pedidos, setPedidos]         = useState<Pedido[]>([]);
+  const [platos, setPlatos]           = useState<Plato[]>([]);
+  const [mesas, setMesas]             = useState<Mesa[]>([]);
+  const [loading, setLoading]         = useState(true);
+  const [error, setError]             = useState(false);
+  const [showForm, setShowForm]       = useState(false);
+  const [mesaId, setMesaId]           = useState("");
+  const [platoIds, setPlatoIds]       = useState<number[]>([]);
+  const [search, setSearch]           = useState("");
+  const [filterEstado, setFilterEstado] = useState("todos");
+  const [stateChange, setStateChange] = useState<{ id: number; newState: string } | null>(null);
+  const { notify } = useNotification();
 
-  const fetchData = () => {
-    Promise.all([
-      fetch(`${API}/pedidos`).then((r) => r.json()),
-      fetch(`${API}/platos`).then((r) => r.json()),
-      fetch(`${API}/mesas`).then((r) => r.json()),
-    ])
-      .then(([pedidos, platos, mesas]) => {
-        setPedidos(Array.isArray(pedidos) ? pedidos : []);
-        setPlatos(Array.isArray(platos) ? platos : []);
-        setMesas(Array.isArray(mesas) ? mesas : []);
-      })
-      .catch(() => setError(true));
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const [pedidosData, platosData, mesasData] = await Promise.all([
+        api<Pedido[]>("/pedidos"),
+        api<Plato[]>("/platos"),
+        api<Mesa[]>("/mesas"),
+      ]);
+      setPedidos(Array.isArray(pedidosData) ? pedidosData : []);
+      setPlatos(Array.isArray(platosData) ? platosData : []);
+      setMesas(Array.isArray(mesasData) ? mesasData : []);
+      setError(false);
+    } catch {
+      setError(true);
+      notify("Error al cargar datos", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  useEffect(fetchData, []);
+  useEffect(() => { fetchData(); }, []);
 
-  const togglePlato = (id: number) => {
-    setPlatoIds((prev) =>
-      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
-    );
-  };
+  const togglePlato = (id: number) =>
+    setPlatoIds((prev) => prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id]);
 
   const crearPedido = async (e: React.FormEvent) => {
     e.preventDefault();
-    await fetch(`${API}/pedidos`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ mesaId: parseInt(mesaId), platoIds }),
-    });
-    setMesaId("");
-    setPlatoIds([]);
-    setShowForm(false);
-    fetchData();
+    if (!mesaId || platoIds.length === 0) { notify("Selecciona mesa y al menos un plato", "error"); return; }
+    try {
+      await api("/pedidos", { method: "POST", body: { mesaId: parseInt(mesaId), platoIds } });
+      notify("Pedido creado correctamente", "success");
+      setMesaId(""); setPlatoIds([]); setShowForm(false);
+      fetchData();
+    } catch { notify("Error al crear pedido", "error"); }
   };
 
-  const estadoColors: Record<string, string> = {
-    pendiente: "bg-yellow-100 text-yellow-700",
-    en_preparacion: "bg-blue-100 text-blue-700",
-    listo: "bg-green-100 text-green-700",
-    entregado: "bg-gray-100 text-gray-700",
+  const cambiarEstadoPedido = async () => {
+    if (!stateChange) return;
+    try {
+      await api(`/pedidos/${stateChange.id}/estado`, { method: "PATCH", body: { estado: stateChange.newState } });
+      notify(`Pedido → ${stateChange.newState}`, "success");
+      setStateChange(null); fetchData();
+    } catch { notify("Error al cambiar estado", "error"); }
   };
+
+  const filteredPedidos = pedidos
+    .filter(p => {
+      const term = search.toLowerCase();
+      return p.mesa?.numero.toString().includes(term) || p.id.toString().includes(term);
+    })
+    .filter(p => filterEstado === "todos" || p.estado === filterEstado);
+
+  const totalPendientes = pedidos.filter(p => p.estado === "pendiente").length;
 
   if (error) {
     return (
-      <div className="text-center py-20">
-        <h1 className="text-2xl font-bold text-red-600">Error de conexión</h1>
-        <p className="text-gray-600 mt-2">No se pudo conectar con el backend</p>
+      <div style={{ textAlign: "center", padding: "5rem 0" }}>
+        <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚡</div>
+        <h1 style={{ color: "#ef4444", margin: "0 0 0.5rem" }}>Error de conexión</h1>
+        <p style={{ color: "var(--text-secondary)", margin: 0 }}>No se pudo conectar con el backend</p>
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Pedidos</h1>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-        >
-          {showForm ? "Cancelar" : "Nuevo Pedido"}
+    <div className="animate-fade-in">
+
+      {/* ── Cabecera ── */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
+        <div>
+          <p style={{ margin: "0 0 4px", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#3b82f6" }}>
+            Control de cocina
+          </p>
+          <h1 style={{ margin: 0, fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.02em", color: "var(--text-primary)" }}>
+            Pedidos
+          </h1>
+          <p style={{ margin: "4px 0 0", fontSize: "0.82rem", color: "var(--text-muted)" }}>
+            {pedidos.length} pedidos en total
+            {totalPendientes > 0 && (
+              <span style={{ marginLeft: "8px", padding: "2px 8px", borderRadius: "99px", background: "rgba(234,179,8,0.15)", color: "#eab308", fontWeight: 700, fontSize: "0.75rem" }}>
+                ⏳ {totalPendientes} pendientes
+              </span>
+            )}
+          </p>
+        </div>
+        <button onClick={() => setShowForm(!showForm)} style={showForm ? btnGhost : btnPrimary}>
+          {showForm ? "✕ Cancelar" : "+ Nuevo Pedido"}
         </button>
       </div>
 
+      {/* ── Formulario ── */}
       {showForm && (
-        <form
-          onSubmit={crearPedido}
-          className="bg-white rounded-xl shadow-md p-6 mb-6"
-        >
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Mesa
-            </label>
-            <select
-              value={mesaId}
-              onChange={(e) => setMesaId(e.target.value)}
-              required
-              className="border rounded-lg px-3 py-2 w-full"
-            >
-              <option value="">Seleccionar mesa</option>
-              {mesas.map((m) => (
-                <option key={m.id} value={m.id}>
-                  Mesa {m.numero}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Platos
-            </label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {platos.map((p) => (
-                <label
-                  key={p.id}
-                  className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer ${
-                    platoIds.includes(p.id)
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200"
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={platoIds.includes(p.id)}
-                    onChange={() => togglePlato(p.id)}
-                    className="sr-only"
-                  />
-                  <span className="text-sm">
-                    {p.nombre} - S/ {p.precio.toFixed(2)}
-                  </span>
-                </label>
-              ))}
+        <div className="animate-slide-down" style={{
+          background: "var(--bg-card)", border: "1px solid var(--border)",
+          borderRadius: "var(--radius-lg)", padding: "1.5rem", marginBottom: "1.5rem",
+        }}>
+          <h3 style={{ margin: "0 0 1.25rem", fontSize: "1rem", fontWeight: 700, color: "var(--text-primary)" }}>
+            📋 Nuevo Pedido
+          </h3>
+          <form onSubmit={crearPedido}>
+            {/* Mesa */}
+            <div style={{ marginBottom: "1.25rem" }}>
+              <label style={{ display: "block", fontSize: "0.78rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "8px" }}>
+                Mesa
+              </label>
+              <select value={mesaId} onChange={(e) => setMesaId(e.target.value)} required style={inputStyle}>
+                <option value="">Seleccionar mesa</option>
+                {mesas.map(m => <option key={m.id} value={m.id}>Mesa {m.numero}</option>)}
+              </select>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
-          >
-            Crear Pedido
-          </button>
-        </form>
+            {/* Platos */}
+            <div style={{ marginBottom: "1.5rem" }}>
+              <label style={{ display: "block", fontSize: "0.78rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "8px" }}>
+                Platos — <span style={{ color: "var(--gold)" }}>{platoIds.length} seleccionados</span>
+              </label>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "8px" }}>
+                {platos.map(p => {
+                  const sel = platoIds.includes(p.id);
+                  return (
+                    <label key={p.id} style={{
+                      display: "flex", alignItems: "center", gap: "10px",
+                      padding: "12px 14px", borderRadius: "10px", cursor: "pointer",
+                      border: `1px solid ${sel ? "rgba(245,158,11,0.4)" : "var(--border)"}`,
+                      background: sel ? "rgba(245,158,11,0.08)" : "var(--bg-input)",
+                      transition: "all 0.15s",
+                    }}>
+                      <input type="checkbox" checked={sel} onChange={() => togglePlato(p.id)} style={{ accentColor: "#f59e0b", width: "16px", height: "16px" }} />
+                      <div>
+                        <p style={{ margin: 0, fontSize: "0.85rem", fontWeight: 600, color: "var(--text-primary)" }}>{p.nombre}</p>
+                        <p style={{ margin: 0, fontSize: "0.75rem", color: "var(--gold)", fontWeight: 700 }}>S/ {p.precio.toFixed(2)}</p>
+                      </div>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Total previo */}
+            {platoIds.length > 0 && (
+              <div style={{ marginBottom: "1.25rem", padding: "12px 16px", borderRadius: "10px", background: "rgba(245,158,11,0.06)", border: "1px solid rgba(245,158,11,0.2)", display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>Total estimado:</span>
+                <span style={{ color: "var(--gold)", fontWeight: 800, fontSize: "1rem" }}>
+                  S/ {platos.filter(p => platoIds.includes(p.id)).reduce((acc, p) => acc + p.precio, 0).toFixed(2)}
+                </span>
+              </div>
+            )}
+
+            <button type="submit" style={{ ...btnPrimary, width: "100%", justifyContent: "center", padding: "12px" }}>
+              Crear Pedido
+            </button>
+          </form>
+        </div>
       )}
 
-      <div className="space-y-4">
-        {pedidos.map((pedido) => (
-          <div
-            key={pedido.id}
-            className="bg-white rounded-xl shadow-md p-6"
-          >
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="text-lg font-bold text-gray-800">
-                  Pedido #{pedido.id}
-                </h3>
-                <p className="text-gray-500">
-                  Mesa {pedido.mesa?.numero || pedido.mesa?.id || "?"}
-                </p>
-                <p className="text-sm text-gray-400">
-                  {new Date(pedido.createdAt).toLocaleString("es-PE")}
-                </p>
-              </div>
-              <div className="text-right">
-                <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    estadoColors[pedido.estado] || "bg-gray-100"
-                  }`}
-                >
-                  {pedido.estado}
-                </span>
-                <p className="text-xl font-bold text-gray-800 mt-2">
-                  S/ {Number(pedido.total).toFixed(2)}
-                </p>
-              </div>
-            </div>
-            <div className="mt-3">
-              <p className="text-sm font-medium text-gray-600">Platos:</p>
-              <div className="flex flex-wrap gap-2 mt-1">
-                {(pedido.platos || []).map((plato) => (
-                  <span
-                    key={plato.id}
-                    className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm"
-                  >
-                    {plato.nombre}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* ── Filtros ── */}
+      <div style={{
+        background: "var(--bg-card)", border: "1px solid var(--border)",
+        borderRadius: "var(--radius-lg)", padding: "1rem 1.25rem", marginBottom: "1.5rem",
+        display: "flex", gap: "12px", flexWrap: "wrap",
+      }}>
+        <input
+          type="text" placeholder="🔍  Buscar por mesa o ID..."
+          value={search} onChange={(e) => setSearch(e.target.value)}
+          style={{ ...inputStyle, flex: 1, minWidth: "200px" }}
+        />
+        <select
+          value={filterEstado} onChange={(e) => setFilterEstado(e.target.value)}
+          style={{ ...inputStyle, width: "auto", minWidth: "180px" }}
+        >
+          <option value="todos">Todos los estados</option>
+          {ESTADOS.map(s => <option key={s} value={s}>{estadoConfig[s].icon} {estadoConfig[s].label}</option>)}
+        </select>
       </div>
+
+      {/* ── Lista de pedidos ── */}
+      {loading ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          {[1,2,3].map(i => <SkeletonCard key={i} />)}
+        </div>
+      ) : filteredPedidos.length === 0 ? (
+        <div style={{ textAlign: "center", padding: "4rem", background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", color: "var(--text-muted)" }}>
+          📋 No hay pedidos para mostrar
+        </div>
+      ) : (
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          {filteredPedidos.map(pedido => {
+            const cfg = estadoConfig[pedido.estado as EstadoKey] ?? estadoConfig["pendiente"];
+            return (
+              <div
+                key={pedido.id}
+                className="animate-fade-in"
+                style={{
+                  background: "var(--bg-card)",
+                  border: `1px solid ${cfg.border}`,
+                  borderRadius: "var(--radius-lg)",
+                  overflow: "hidden",
+                  transition: "box-shadow 0.2s",
+                }}
+              >
+                {/* Barra de color de estado arriba */}
+                <div style={{ height: "3px", background: cfg.color, opacity: 0.8 }} />
+
+                <div style={{ padding: "1.25rem 1.5rem" }}>
+                  {/* Header */}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem", flexWrap: "wrap", gap: "0.75rem" }}>
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
+                        <span style={{ fontSize: "1rem", fontWeight: 800, color: "var(--text-primary)" }}>
+                          Pedido #{pedido.id}
+                        </span>
+                        <span style={{
+                          padding: "3px 10px", borderRadius: "99px", fontSize: "0.72rem",
+                          fontWeight: 700, background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.border}`,
+                        }}>
+                          {cfg.icon} {cfg.label}
+                        </span>
+                      </div>
+                      <p style={{ margin: 0, fontSize: "0.82rem", color: "var(--text-muted)" }}>
+                        🍽️ Mesa {pedido.mesa?.numero ?? "?"} · {new Date(pedido.createdAt).toLocaleString("es-PE")}
+                      </p>
+                    </div>
+
+                    <div style={{ textAlign: "right" }}>
+                      <p style={{ margin: "0 0 2px", fontSize: "0.72rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Total</p>
+                      <p style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, color: "var(--gold)", lineHeight: 1 }}>
+                        S/ {Number(pedido.total).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Barra de progreso */}
+                  <div style={{ marginBottom: "1rem" }}>
+                    <ProgressBar estado={pedido.estado} />
+                  </div>
+
+                  {/* Platos */}
+                  <div style={{ marginBottom: "1rem", paddingBottom: "1rem", borderBottom: "1px solid var(--border)" }}>
+                    <p style={{ margin: "0 0 8px", fontSize: "0.75rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                      Platos
+                    </p>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                      {(pedido.platos || []).map(plato => (
+                        <span key={plato.id} style={{
+                          padding: "4px 12px", borderRadius: "99px",
+                          fontSize: "0.78rem", fontWeight: 600,
+                          background: "rgba(59,130,246,0.1)",
+                          color: "#60a5fa",
+                          border: "1px solid rgba(59,130,246,0.2)",
+                        }}>
+                          {plato.nombre} · <span style={{ color: "var(--gold)" }}>S/ {plato.precio.toFixed(2)}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Botones de cambio de estado */}
+                  <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                    {ESTADOS.filter(s => s !== pedido.estado).map(s => {
+                      const sc = estadoConfig[s];
+                      return (
+                        <button
+                          key={s}
+                          onClick={() => setStateChange({ id: pedido.id, newState: s })}
+                          style={{
+                            padding: "7px 14px", borderRadius: "7px",
+                            background: sc.bg, border: `1px solid ${sc.border}`,
+                            color: sc.color, fontSize: "0.8rem", fontWeight: 600, cursor: "pointer",
+                          }}
+                        >
+                          {sc.icon} {sc.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <ConfirmDialog
+        isOpen={stateChange !== null}
+        title="Cambiar estado del pedido"
+        message={`¿Deseas cambiar el Pedido #${stateChange?.id} a "${stateChange?.newState}"?`}
+        onConfirm={cambiarEstadoPedido}
+        onCancel={() => setStateChange(null)}
+        isDangerous={false}
+      />
     </div>
   );
 }

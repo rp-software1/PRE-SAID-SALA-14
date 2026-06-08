@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import { NotificationProvider } from "@/components/Notification";
+import { NavBar } from "@/components/NavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "Sistema de Restaurante",
-  description: "Gestión de restaurante",
+  title: "RestaurantePRO — Sistema de Gestión",
+  description: "Sistema profesional de gestión para restaurantes: platos, mesas y pedidos.",
 };
 
 export default function RootLayout({
@@ -24,36 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" className={inter.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        style={{ background: "var(--bg-base)", color: "var(--text-primary)" }}
+        className="antialiased"
       >
-        <nav className="bg-blue-600 text-white shadow-lg">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-between h-16">
-              <Link href="/" className="font-bold text-xl">
-                Restaurante
-              </Link>
-              <div className="flex gap-6">
-                <Link href="/" className="hover:text-blue-200 transition">
-                  Dashboard
-                </Link>
-                <Link href="/platos" className="hover:text-blue-200 transition">
-                  Platos
-                </Link>
-                <Link href="/mesas" className="hover:text-blue-200 transition">
-                  Mesas
-                </Link>
-                <Link href="/pedidos" className="hover:text-blue-200 transition">
-                  Pedidos
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <main className="max-w-7xl mx-auto px-4 py-8">
-          {children}
-        </main>
+        <NotificationProvider>
+          <NavBar />
+          <main
+            style={{ maxWidth: "1280px", margin: "0 auto", padding: "2rem 1.5rem" }}
+          >
+            {children}
+          </main>
+        </NotificationProvider>
       </body>
     </html>
   );
