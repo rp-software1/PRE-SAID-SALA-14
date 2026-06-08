@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LayoutDashboard, UtensilsCrossed, Table2, ClipboardList, ChefHat, Receipt } from "lucide-react";
 
 const navLinks = [
-  { href: "/",          label: "Dashboard", icon: "⊞" },
-  { href: "/platos",    label: "Platos",    icon: "🍲" },
-  { href: "/mesas",     label: "Mesas",     icon: "🪑" },
-  { href: "/pedidos",   label: "Pedidos",   icon: "📋" },
-  { href: "/comandas",  label: "Comandas",  icon: "🔥" },
-  { href: "/tickets",   label: "Tickets",   icon: "🧾" },
+  { href: "/",         label: "Dashboard", icon: LayoutDashboard },
+  { href: "/platos",   label: "Platos",    icon: UtensilsCrossed },
+  { href: "/mesas",    label: "Mesas",     icon: Table2 },
+  { href: "/pedidos",  label: "Pedidos",   icon: ClipboardList },
+  { href: "/comandas", label: "Comandas",  icon: ChefHat },
+  { href: "/tickets",  label: "Tickets",   icon: Receipt },
 ];
 
 export function NavBar() {
@@ -33,8 +34,10 @@ export function NavBar() {
                 width: "34px", height: "34px", borderRadius: "9px",
                 background: "linear-gradient(135deg, #f59e0b, #d97706)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "17px", boxShadow: "0 0 14px rgba(245,158,11,0.35)",
-              }}>🍽️</div>
+                boxShadow: "0 0 14px rgba(245,158,11,0.35)",
+              }}>
+                <UtensilsCrossed size={18} color="#fff" />
+              </div>
               <span style={{
                 fontWeight: 700, fontSize: "1rem",
                 background: "linear-gradient(135deg, #fbbf24, #f59e0b)",
@@ -46,12 +49,12 @@ export function NavBar() {
 
           {/* Links */}
           <div style={{ display: "flex", gap: "2px", flexWrap: "wrap" }}>
-            {navLinks.map(({ href, label, icon }) => {
+            {navLinks.map(({ href, label, icon: Icon }) => {
               const active = pathname === href;
               return (
                 <Link key={href} href={href} style={{ textDecoration: "none" }}>
                   <div style={{
-                    display: "flex", alignItems: "center", gap: "5px",
+                    display: "flex", alignItems: "center", gap: "6px",
                     padding: "7px 13px", borderRadius: "8px",
                     fontSize: "0.82rem", fontWeight: 500,
                     transition: "all 0.2s",
@@ -59,7 +62,7 @@ export function NavBar() {
                     color: active ? "#fbbf24" : "rgba(255,255,255,0.55)",
                     border: active ? "1px solid rgba(245,158,11,0.3)" : "1px solid transparent",
                   }}>
-                    <span style={{ fontSize: "13px" }}>{icon}</span>
+                    <Icon size={14} />
                     {label}
                   </div>
                 </Link>

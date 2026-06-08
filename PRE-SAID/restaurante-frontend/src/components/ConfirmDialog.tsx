@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { AlertTriangle, HelpCircle } from "lucide-react";
 
 interface ConfirmDialogProps {
   title: string;
@@ -11,30 +12,19 @@ interface ConfirmDialogProps {
   isDangerous?: boolean;
 }
 
-export function ConfirmDialog({
-  title,
-  message,
-  onConfirm,
-  onCancel,
-  isOpen,
-  isDangerous = true,
-}: ConfirmDialogProps) {
+export function ConfirmDialog({ title, message, onConfirm, onCancel, isOpen, isDangerous = true }: ConfirmDialogProps) {
   const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
   const handleConfirm = async () => {
     setLoading(true);
-    try {
-      await onConfirm();
-    } finally {
-      setLoading(false);
-    }
+    try { await onConfirm(); } finally { setLoading(false); }
   };
 
   const accentColor = isDangerous ? "#ef4444" : "#f59e0b";
   const accentGlow  = isDangerous ? "rgba(239,68,68,0.25)" : "rgba(245,158,11,0.25)";
-  const accentHover = isDangerous ? "#dc2626" : "#d97706";
+  const IconComp    = isDangerous ? AlertTriangle : HelpCircle;
 
   return (
     <div
@@ -59,7 +49,7 @@ export function ConfirmDialog({
           overflow: "hidden",
         }}
       >
-        {/* Header con acento de color */}
+        {/* Header */}
         <div style={{
           padding: "1.5rem 1.5rem 1rem",
           borderBottom: "1px solid var(--border)",
@@ -69,57 +59,41 @@ export function ConfirmDialog({
             width: "40px", height: "40px", borderRadius: "10px", flexShrink: 0,
             background: isDangerous ? "rgba(239,68,68,0.12)" : "rgba(245,158,11,0.12)",
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "20px",
           }}>
-            {isDangerous ? "⚠️" : "❓"}
+            <IconComp size={20} color={accentColor} />
           </div>
-          <h2 style={{
-            margin: 0, fontSize: "1.05rem", fontWeight: 700,
-            color: "var(--text-primary)",
-          }}>
+          <h2 style={{ margin: 0, fontSize: "1.05rem", fontWeight: 700, color: "var(--text-primary)" }}>
             {title}
           </h2>
         </div>
 
-        {/* Cuerpo */}
+        {/* Body */}
         <div style={{ padding: "1.25rem 1.5rem 1.5rem" }}>
-          <p style={{
-            margin: "0 0 1.5rem",
-            color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.6,
-          }}>
+          <p style={{ margin: "0 0 1.5rem", color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.6 }}>
             {message}
           </p>
-
           <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
-            {/* Cancelar */}
             <button
               onClick={onCancel}
               disabled={loading}
               style={{
                 padding: "9px 20px", borderRadius: "8px",
-                background: "transparent",
-                border: "1px solid var(--border)",
-                color: "var(--text-secondary)",
-                fontSize: "0.875rem", fontWeight: 500,
-                opacity: loading ? 0.5 : 1,
+                background: "transparent", border: "1px solid var(--border)",
+                color: "var(--text-secondary)", fontSize: "0.875rem", fontWeight: 500,
+                opacity: loading ? 0.5 : 1, cursor: "pointer",
               }}
             >
               Cancelar
             </button>
-
-            {/* Confirmar */}
             <button
               onClick={handleConfirm}
               disabled={loading}
               style={{
                 padding: "9px 24px", borderRadius: "8px",
-                background: accentColor,
-                border: "none",
-                color: "#fff",
+                background: accentColor, border: "none", color: "#fff",
                 fontSize: "0.875rem", fontWeight: 600,
                 boxShadow: `0 4px 14px ${accentGlow}`,
-                opacity: loading ? 0.7 : 1,
-                transition: "all 0.2s",
+                opacity: loading ? 0.7 : 1, transition: "all 0.2s", cursor: "pointer",
               }}
             >
               {loading ? "Procesando..." : "Confirmar"}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Receipt, CreditCard, Banknote, Plus, X, Zap, CheckCircle2, Circle } from "lucide-react";
 import { api } from "@/lib/api";
 import { useNotification } from "@/components/Notification";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
@@ -93,7 +94,7 @@ export default function TicketsPage() {
 
   if (error) return (
     <div style={{ textAlign: "center", padding: "5rem 0" }}>
-      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚡</div>
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem" }}><Zap size={48} color="#ef4444" /></div>
       <h1 style={{ color: "#ef4444", margin: "0 0 0.5rem" }}>Error de conexión</h1>
       <p style={{ color: "var(--text-secondary)", margin: 0 }}>No se pudo conectar con el backend</p>
     </div>
@@ -112,7 +113,7 @@ export default function TicketsPage() {
           </p>
         </div>
         <button onClick={() => setShowForm(!showForm)} style={showForm ? btnGhost : btnPrimary}>
-          {showForm ? "✕ Cancelar" : "+ Generar Ticket"}
+          {showForm ? <><X size={15} /> Cancelar</> : <><Plus size={15} /> Generar Ticket</>}
         </button>
       </div>
 
@@ -190,12 +191,14 @@ export default function TicketsPage() {
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
                     <div>
                       <p style={{ margin: "0 0 2px", fontWeight: 800, fontSize: "1rem", color: "var(--text-primary)" }}>Ticket #{ticket.id}</p>
-                      <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-muted)" }}>
-                        🪑 Mesa {ticket.mesa?.numero ?? "?"} · {new Date(ticket.createdAt).toLocaleString("es-PE")}
+                      <p style={{ margin: 0, fontSize: "0.82rem", color: "var(--text-muted)" }}>
+                        <Receipt size={13} style={{ marginRight: "4px", display: "inline" }} />
+                        Mesa {ticket.mesa?.numero ?? "?"} · {new Date(ticket.createdAt).toLocaleString("es-PE")}
                       </p>
                       {ticket.metodoPago && (
                         <p style={{ margin: "3px 0 0", fontSize: "0.78rem", color: "#10b981" }}>
-                          💳 Pagado con {ticket.metodoPago}
+                          <CreditCard size={12} style={{ marginRight: "4px", display: "inline" }} />
+                          Pagado con {ticket.metodoPago}
                         </p>
                       )}
                     </div>
@@ -204,8 +207,9 @@ export default function TicketsPage() {
                       background: pagado ? "rgba(16,185,129,0.1)" : "rgba(245,158,11,0.1)",
                       color: pagado ? "#10b981" : "#f59e0b",
                       border: `1px solid ${pagado ? "rgba(16,185,129,0.25)" : "rgba(245,158,11,0.25)"}`,
+                      display: "inline-flex", alignItems: "center", gap: "4px",
                     }}>
-                      {pagado ? "✅ Pagado" : "🟡 Abierto"}
+                      {pagado ? <><CheckCircle2 size={11} /> Pagado</> : <><Circle size={11} /> Abierto</>}
                     </span>
                   </div>
 
@@ -221,9 +225,9 @@ export default function TicketsPage() {
                   {!pagado && (
                     <button
                       onClick={() => { setPagarId(ticket.id); setMetodoPago("efectivo"); }}
-                      style={{ ...btnPrimary, width: "100%", justifyContent: "center", padding: "10px" }}
+                      style={{ ...btnPrimary, width: "100%", justifyContent: "center", padding: "10px", display: "inline-flex", alignItems: "center", gap: "6px" }}
                     >
-                      💰 Cobrar ticket
+                      <Banknote size={15} /> Cobrar ticket
                     </button>
                   )}
                 </div>
@@ -250,8 +254,9 @@ export default function TicketsPage() {
                     background: metodoPago === m ? "rgba(245,158,11,0.15)" : "var(--bg-input)",
                     border: `1px solid ${metodoPago === m ? "rgba(245,158,11,0.4)" : "var(--border)"}`,
                     color: metodoPago === m ? "#f59e0b" : "var(--text-secondary)",
+                    display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px",
                   }}>
-                    {m === "efectivo" ? "💵 Efectivo" : "💳 Tarjeta"}
+                    {m === "efectivo" ? <><Banknote size={15} /> Efectivo</> : <><CreditCard size={15} /> Tarjeta</>}
                   </button>
                 ))}
               </div>

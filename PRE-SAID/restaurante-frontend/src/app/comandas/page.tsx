@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Inbox, Flame, CheckCircle2, Plus, X, Zap } from "lucide-react";
 import { api } from "@/lib/api";
 import { useNotification } from "@/components/Notification";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
@@ -21,10 +22,10 @@ interface Comanda {
 const ESTADOS = ["recibida", "en_preparacion", "lista"] as const;
 type EstadoKey = typeof ESTADOS[number];
 
-const estadoConfig: Record<EstadoKey, { label: string; icon: string; color: string; bg: string; border: string }> = {
-  recibida:       { label: "Recibida",     icon: "📥", color: "#eab308", bg: "rgba(234,179,8,0.1)",    border: "rgba(234,179,8,0.25)" },
-  en_preparacion: { label: "Preparando",   icon: "🔥", color: "#f59e0b", bg: "rgba(245,158,11,0.1)",  border: "rgba(245,158,11,0.25)" },
-  lista:          { label: "Lista",        icon: "✅", color: "#10b981", bg: "rgba(16,185,129,0.1)",   border: "rgba(16,185,129,0.25)" },
+const estadoConfig: Record<EstadoKey, { label: string; Icon: React.ElementType; color: string; bg: string; border: string }> = {
+  recibida:       { label: "Recibida",  Icon: Inbox,        color: "#eab308", bg: "rgba(234,179,8,0.1)",    border: "rgba(234,179,8,0.25)" },
+  en_preparacion: { label: "Preparando", Icon: Flame,       color: "#f59e0b", bg: "rgba(245,158,11,0.1)",  border: "rgba(245,158,11,0.25)" },
+  lista:          { label: "Lista",     Icon: CheckCircle2, color: "#10b981", bg: "rgba(16,185,129,0.1)",   border: "rgba(16,185,129,0.25)" },
 };
 
 const inputStyle: React.CSSProperties = {
@@ -98,7 +99,7 @@ export default function ComandasPage() {
 
   if (error) return (
     <div style={{ textAlign: "center", padding: "5rem 0" }}>
-      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚡</div>
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem" }}><Zap size={48} color="#ef4444" /></div>
       <h1 style={{ color: "#ef4444", margin: "0 0 0.5rem" }}>Error de conexión</h1>
       <p style={{ color: "var(--text-secondary)", margin: 0 }}>No se pudo conectar con el backend</p>
     </div>
@@ -116,14 +117,14 @@ export default function ComandasPage() {
           </p>
         </div>
         <button onClick={() => setShowForm(!showForm)} style={showForm ? btnGhost : btnPrimary}>
-          {showForm ? "✕ Cancelar" : "+ Nueva Comanda"}
+          {showForm ? <><X size={15} /> Cancelar</> : <><Plus size={15} /> Nueva Comanda</>}
         </button>
       </div>
 
       {/* Formulario */}
       {showForm && (
         <div className="animate-slide-down" style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1.5rem", marginBottom: "1.5rem" }}>
-          <h3 style={{ margin: "0 0 1.25rem", fontSize: "1rem", fontWeight: 700, color: "var(--text-primary)" }}>📥 Nueva Comanda</h3>
+          <h3 style={{ margin: "0 0 1.25rem", fontSize: "1rem", fontWeight: 700, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}><Inbox size={16} color="var(--gold)" /> Nueva Comanda</h3>
           <form onSubmit={crearComanda}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "12px" }}>
               <div>
@@ -147,7 +148,7 @@ export default function ComandasPage() {
       <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", padding: "1rem 1.25rem", marginBottom: "1.5rem" }}>
         <select value={filterEstado} onChange={e => setFilterEstado(e.target.value)} style={{ ...inputStyle, width: "auto", minWidth: "200px" }}>
           <option value="todos">Todos los estados</option>
-          {ESTADOS.map(s => <option key={s} value={s}>{estadoConfig[s].icon} {estadoConfig[s].label}</option>)}
+          {ESTADOS.map(s => <option key={s} value={s}>{estadoConfig[s].label}</option>)}
         </select>
       </div>
 
@@ -158,7 +159,7 @@ export default function ComandasPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div style={{ textAlign: "center", padding: "4rem", background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", color: "var(--text-muted)" }}>
-          📥 No hay comandas para mostrar
+          No hay comandas para mostrar
         </div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))", gap: "1rem" }}>
@@ -178,8 +179,8 @@ export default function ComandasPage() {
                         <p style={{ margin: "4px 0 0", fontSize: "0.78rem", color: "var(--gold)", fontStyle: "italic" }}>"{c.observaciones}"</p>
                       )}
                     </div>
-                    <span style={{ padding: "4px 10px", borderRadius: "99px", fontSize: "0.72rem", fontWeight: 700, background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.border}` }}>
-                      {cfg.icon} {cfg.label}
+                    <span style={{ padding: "4px 10px", borderRadius: "99px", fontSize: "0.72rem", fontWeight: 700, background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.border}`, display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                      <cfg.Icon size={11} /> {cfg.label}
                     </span>
                   </div>
 
@@ -203,8 +204,8 @@ export default function ComandasPage() {
                       const sc = estadoConfig[s];
                       return (
                         <button key={s} onClick={() => setStateChange({ id: c.id, newState: s })}
-                          style={{ padding: "7px", borderRadius: "7px", background: sc.bg, border: `1px solid ${sc.border}`, color: sc.color, fontSize: "0.8rem", fontWeight: 600, cursor: "pointer" }}>
-                          {sc.icon} Marcar como {sc.label}
+                          style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "7px", borderRadius: "7px", background: sc.bg, border: `1px solid ${sc.border}`, color: sc.color, fontSize: "0.8rem", fontWeight: 600, cursor: "pointer" }}>
+                          <sc.Icon size={13} /> Marcar como {sc.label}
                         </button>
                       );
                     })}
