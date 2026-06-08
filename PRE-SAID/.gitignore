@@ -1,4 +1,16 @@
-node_modules/
-dist/
-db.sqlite
-*.log
+# Backend
+restaurante-backend/node_modules/
+restaurante-backend/dist/
+restaurante-backend/*.log
+restaurante-backend/.env
+
+# Frontend
+restaurante-frontend/node_modules/
+restaurante-frontend/.next/
+
+# SQLite
+restaurante-backend/db.sqlite
+
+# OS
+.DS_Store
+Thumbs.db

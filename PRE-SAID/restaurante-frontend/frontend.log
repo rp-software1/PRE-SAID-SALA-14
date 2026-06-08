@@ -1,0 +1,1251 @@
+
+> restaurante-frontend@0.1.0 dev
+> next dev
+
+⚠ Port 3000 is in use by process 15788, using available port 3001 instead.
+▲ Next.js 16.2.7 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.56.1:3001
+✓ Ready in 568ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\USER\PRE-SAID\PRE-SAID-SALA-14\PRE-SAID\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\USER\PRE-SAID\PRE-SAID-SALA-14\PRE-SAID\restaurante-frontend\package-lock.json
+
+
+○ Compiling / ...
+ HEAD / 200 in 14.7s (next.js: 14.5s, application-code: 174ms)
+ GET / 200 in 67ms (next.js: 6ms, application-code: 61ms)
+ GET /platos 200 in 249ms (next.js: 219ms, application-code: 30ms)
+ GET /mesas 200 in 237ms (next.js: 214ms, application-code: 23ms)
+ GET /pedidos 200 in 236ms (next.js: 211ms, application-code: 25ms)
+ GET / 200 in 16ms (next.js: 3ms, application-code: 13ms)
+ GET /pedidos 200 in 21ms (next.js: 3ms, application-code: 18ms)
+ GET / 200 in 19ms (next.js: 3ms, application-code: 16ms)
+⨯ ./restaurante-frontend/src/app/globals.css:962:8
+Parsing CSS source code failed
+  [90m960 |[0m   }
+  [90m961 |[0m }
+[31m[1m>[0m [90m962 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m963 |[0m :root {
+  [90m964 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m965 |[0m   --bg-surface: #[35m161616[0m;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:962:8
+  [90m960 |[0m   }
+  [90m961 |[0m }
+[31m[1m>[0m [90m962 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m963 |[0m :root {
+  [90m964 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m965 |[0m   --bg-surface: #[35m161616[0m;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+ GET / 500 in 982ms (next.js: 829ms, application-code: 153ms)
+[browser] Uncaught Error: ./restaurante-frontend/src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+    at <unknown> (Error: ./restaurante-frontend/src/app/globals.css:962:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:962:8)
+    at <unknown> (Error: (./restaurante-frontend/src/app/globals.css:962:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:962:8)
+[browser] ./restaurante-frontend/src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  963 | :root {
+  964 |   --bg-base: #0d0d0d;
+  965 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+⨯ ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+ GET / 500 in 18ms (next.js: 8ms, application-code: 10ms)
+[browser] Uncaught Error: ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+    at <unknown> (Error: ./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (Error: (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+⨯ ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+ GET / 500 in 15ms (next.js: 7ms, application-code: 8ms)
+[browser] Uncaught Error: ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+    at <unknown> (Error: ./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (Error: (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+⨯ ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+ GET / 500 in 17ms (next.js: 8ms, application-code: 9ms)
+[browser] Uncaught Error: ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+    at <unknown> (Error: ./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (Error: (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+⨯ ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+ GET / 500 in 12ms (next.js: 5ms, application-code: 6ms)
+[browser] Uncaught Error: ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+    at <unknown> (Error: ./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (Error: (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+⨯ ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  [90m220 |[0m   }
+  [90m221 |[0m }
+[31m[1m>[0m [90m222 |[0m @[36mimport[0m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...[0m
+  [90m    |[0m        [31m[1m^[0m
+  [90m223 |[0m :root {
+  [90m224 |[0m   --bg-base: #[35m0[0md0d0d;
+  [90m225 |[0m   --bg-surface: #[35m161616[0m;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+ GET / 500 in 22ms (next.js: 9ms, application-code: 13ms)
+[browser] Uncaught Error: ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component]
+
+
+    at <unknown> (Error: ./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (Error: (./restaurante-frontend/src/app/globals.css:222:8)
+    at <unknown> (./restaurante-frontend/src/app/globals.css:222:8)
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[browser] ./restaurante-frontend/src/app/globals.css:222:8
+Parsing CSS source code failed
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of restaurante-frontend/src/app/globals.css:
+./restaurante-frontend/src/app/globals.css:222:8
+  220 |   }
+  221 | }
+> 222 | @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&...
+      |        ^
+  223 | :root {
+  224 |   --bg-base: #0d0d0d;
+  225 |   --bg-surface: #161616;
+
+Import trace:
+  Client Component Browser:
+    ./restaurante-frontend/src/app/globals.css [Client Component Browser]
+    ./restaurante-frontend/src/app/layout.tsx [Server Component] 
+[?25h
