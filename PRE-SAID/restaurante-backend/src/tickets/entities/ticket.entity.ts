@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -23,10 +24,8 @@ export class Ticket {
   id: number;
 
   @ManyToOne(() => Mesa)
+  @JoinColumn({ name: 'mesa_id' })
   mesa: Mesa;
-
-  @Column({ name: 'mesa_id' })
-  mesaId: number;
 
   @Column('decimal', { precision: 10, scale: 2, default: 0, transformer: { to: (v: number) => v, from: (v: string) => parseFloat(v) } })
   total: number;

@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -20,10 +21,8 @@ export class Comanda {
   id: number;
 
   @ManyToOne(() => Pedido, (pedido) => pedido.comandas)
+  @JoinColumn({ name: 'pedido_id' })
   pedido: Pedido;
-
-  @Column({ name: 'pedido_id' })
-  pedidoId: number;
 
   @Column({ type: 'text', default: EstadoComanda.RECIBIDA })
   estado: EstadoComanda;

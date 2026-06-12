@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
@@ -38,10 +39,8 @@ export class Pedido {
   updatedAt: Date;
 
   @ManyToOne(() => Mesa, (mesa) => mesa.pedidos)
+  @JoinColumn({ name: 'mesa_id' })
   mesa: Mesa;
-
-  @Column({ name: 'mesa_id' })
-  mesaId: number;
 
   @ManyToMany(() => Plato, (plato) => plato.pedidos)
   @JoinTable({
