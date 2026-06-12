@@ -1,5 +1,10 @@
 # Feedback Día 1 — Valentino Cuenca 5 FN
 
+**Sala:** I-SALA14
+**Fecha:** 01/06/2026
+
+---
+
 ## 1. ¿Gemini CLI fue fácil de instalar? ¿Problemas?
 
 Más o menos. El comando `npm install -g @google/gemini-cli` en sí no tiene ningún misterio, pero después cuando intenté correrlo desde PowerShell me decía que el comando no existía. Tardé un rato en darme cuenta de que era un problema del PATH, que la carpeta global de npm no estaba incluida. Una vez que la agregué manualmente a la sesión funcionó. No es algo complicado pero si no sabés lo que estás mirando te puede comer 20 minutos fácil.

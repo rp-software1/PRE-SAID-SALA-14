@@ -1,5 +1,11 @@
 # Feedback Día 3 — Valentino Cuenca 5 FN
 
+**Sala:** I-SALA14
+**Fecha:** 06/06/2026
+
+---
+
+
 1. **¿Las relaciones (ManyToOne, ManyToMany) fueron difíciles para la IA o las hizo bien?**
    La verdad que las hizo bien, mejor de lo que esperaba. Generó el `@ManyToOne` para Mesa y el `@ManyToMany` para Platos sin que yo tuviera que corregirle nada. También agregó solo el `@JoinTable` con el nombre de la tabla intermedia y las columnas, que es algo que yo mismo no hubiera sabido poner de memoria. Lo que más me sorprendió es que también modificó las entidades de Platos y Mesas para agregar el lado inverso de las relaciones, que es algo que te podés olvidar fácilmente y después te rompe las queries.
 

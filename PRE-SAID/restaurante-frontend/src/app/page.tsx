@@ -65,7 +65,7 @@ export default function Dashboard() {
         <p style={{ color: "var(--text-secondary)", margin: 0 }}>
           No se pudo conectar con el backend en{" "}
           <code style={{ color: "var(--gold)", background: "rgba(245,158,11,0.1)", padding: "2px 6px", borderRadius: "4px" }}>
-            http://localhost:3000
+            {process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}
           </code>
         </p>
       </div>

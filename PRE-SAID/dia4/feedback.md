@@ -1,5 +1,11 @@
 # Feedback Día 4 — Valentino Cuenca 5 FN
 
+**Sala:** I-SALA14
+**Fecha:** 08/06/2026
+
+---
+
+
 1. **¿Comandas y Tickets fueron rápidos de construir? ¿El patrón ayudó o generó confianza excesiva?**
    Sí, la verdad fue bastante rápido. Ya con los días anteriores encima uno le agarra la lógica al patrón y fluye solo. Lo que sí me pareció importante es no relajarse tanto, porque justo cuando pensás que ya sabés lo que va a generar la IA es cuando te pasa algo por alto. A mí me pasó que asumí que el módulo iba a quedar igual que el de Mesas y casi no lo revisé, pero por suerte me di cuenta a tiempo de que había un detalle en la relación con Pedidos que no estaba bien.
 
