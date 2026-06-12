@@ -1,5 +1,26 @@
 # CHANGES.md — Historial de cambios
 
+## Día 5 — Deploy a producción
+
+### Deploy — Backend (Render)
+- Migración de SQLite → PostgreSQL con variables de entorno
+- `DATABASE_URL` para conexión a PostgreSQL; fallback a SQLite local
+- `@nestjs/config` para gestión de variables de entorno
+- `.env.example` con variables documentadas
+- Deploy en Render: https://pre-said-sala-14.onrender.com
+- Base de datos: PostgreSQL en Render
+
+### Deploy — Frontend (Vercel)
+- Variable `NEXT_PUBLIC_API_URL` para entorno
+- `.env` y `.env.example` para el frontend
+- Deploy en Vercel: https://pre-said-sala-14.vercel.app
+
+### Fixes para producción
+- Transformers `decimal → number` en Plato.precio, Pedido.total, Ticket.total
+- Eliminación de FK duplicadas (`@Column` redundante con `@ManyToOne`)
+- `@JoinColumn({ name })` para nombres de columna explícitos
+- Hardcode `http://localhost:3000` reemplazado por `NEXT_PUBLIC_API_URL`
+
 ## Día 4 — Backend completo + Frontend Next.js
 
 ### Backend — Módulo Comandas
