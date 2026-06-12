@@ -28,7 +28,7 @@ export class Ticket {
   @Column({ name: 'mesa_id' })
   mesaId: number;
 
-  @Column('decimal', { precision: 10, scale: 2, default: 0 })
+  @Column('decimal', { precision: 10, scale: 2, default: 0, transformer: { to: (v: number) => v, from: (v: string) => parseFloat(v) } })
   total: number;
 
   @Column({ type: 'text', nullable: true })

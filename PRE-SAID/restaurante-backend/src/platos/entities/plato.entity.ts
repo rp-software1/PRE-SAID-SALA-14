@@ -16,7 +16,7 @@ export class Plato {
   @Column({ length: 100 })
   nombre: string;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2, transformer: { to: (v: number) => v, from: (v: string) => parseFloat(v) } })
   precio: number;
 
   @Column({ default: true })

@@ -28,7 +28,7 @@ export class Pedido {
   @Column({ type: 'text', default: EstadoPedido.PENDIENTE })
   estado: EstadoPedido;
 
-  @Column('decimal', { precision: 10, scale: 2, default: 0 })
+  @Column('decimal', { precision: 10, scale: 2, default: 0, transformer: { to: (v: number) => v, from: (v: string) => parseFloat(v) } })
   total: number;
 
   @CreateDateColumn({ name: 'created_at' })
